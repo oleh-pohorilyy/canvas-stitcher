@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="gallery.css">
+  <script src="utils.js"></script>
+  <script src="gallery/galleryItem.js"></script>
+	<script src="ResourceManager.js" defer></script>
+	<script src="canva.js" defer></script>
+	<script src="main.js" defer></script>
+</head>
+<body>
+  <div id="settings">
+
+  </div>
+
+	<div id="root"></div>
+
+  <div id="gallery">
+    <label class="file-input-button">
+      <span>Load Image</span>
+      <input type="file" id="file-input" accept="image/*" multiple>
+    </label>
+
+    <div class="gallery-scroller"></div>
+  </div>
+</body>
+</html>

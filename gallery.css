@@ -1,0 +1,91 @@
+.file-input-button {
+  display: inline-block;
+
+  padding: 4px 8px;
+  background-color: #00aaff;
+  cursor: pointer;
+  user-select: none;
+
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+
+  transition: 0.2s;
+}
+
+.file-input-button:hover {
+  background-color: #55c6ff;
+  transition: 0.2s;
+}
+
+#file-input {
+	display: none;
+}
+
+/* =============== */
+
+#gallery {
+  overflow: hidden;
+
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(calc(100% - 10px));
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 8px;
+
+  width: 360px;
+  height: 100%;
+
+  background-color: rgba(0, 121, 255, 0.6);
+
+  box-sizing: border-box;
+  padding: 8px;
+
+  transition: 0.3s transform;
+}
+
+#gallery:hover {
+  transform: translateX(0px);
+  transition: 0.1s transform;
+}
+
+#gallery .gallery-scroller {
+  height: 100%;
+  overflow-y: auto;
+}
+
+#gallery .gallery-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  height: 80px;
+  width: 100%;
+
+  background-color: rgba(0, 121, 255, 1);
+
+  user-select: none;
+}
+
+#gallery .gallery-item.selected {
+  background-color: rgb(118, 182, 255);
+}
+
+#gallery .gallery-item__img {
+  width: 100%;
+
+  pointer-events: none;
+
+  max-width: 100px;
+  max-height: 100%;
+
+  margin-left: 4px;
+}
+
+#gallery .gallery-item__name {
+  text-overflow: ellipsis;
+}
