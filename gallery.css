@@ -46,6 +46,8 @@
   padding: 8px;
 
   transition: 0.3s transform;
+
+  z-index: 2;
 }
 
 #gallery:hover {

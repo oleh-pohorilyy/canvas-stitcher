@@ -31,10 +31,35 @@ resourceManager.subscribe((all) => {
   gallery.append(...elements)
 })
 
-document
-  .getElementById('file-input')
-  .addEventListener('change', (event) => {
-    for(const file of event.target.files) {
-      resourceManager.add(file.name, file)
-    }
+const fileInput = document.getElementById('file-input')
+const crossPaddingInput = document.getElementById('cross-padding-input')
+const crossSizeInput = document.getElementById('cross-size-input')
+const thicknessInput = document.getElementById('thickness-input')
+
+crossPaddingInput.value = canva._padding
+crossSizeInput.value = canva._crossSize
+thicknessInput.value = canva._thickness
+
+fileInput.addEventListener('change', (event) => {
+  for(const file of event.target.files) {
+    resourceManager.add(file.name, file)
+  }
+})
+
+crossPaddingInput.addEventListener('change', (event) => {
+  const value = event.target.value
+
+  canva.padding = Number(value)
+})
+
+crossSizeInput.addEventListener('change', (event) => {
+  const value = event.target.value
+
+  canva.crossSize = Number(value)
+})
+
+thicknessInput.addEventListener('change', (event) => {
+  const value = event.target.value
+
+  canva.thickness = Number(value)
 })

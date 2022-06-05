@@ -6,6 +6,7 @@
 	<title>Document</title>
 	
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="settings.css">
 	<link rel="stylesheet" type="text/css" href="gallery.css">
   <script src="utils.js"></script>
   <script src="gallery/galleryItem.js"></script>
@@ -15,7 +16,20 @@
 </head>
 <body>
   <div id="settings">
+    <div class="settings-item">
+      <span class="settings-item__name">Cross Padding</span>
+      <input id="cross-padding-input" type="range" step="1" min="0" max="10" value="0">
+    </div>
 
+    <div class="settings-item">
+      <span class="settings-item__name">Cross Size</span>
+      <input id="cross-size-input" type="range" step="1" min="0" max="50" value="0">
+    </div>
+
+    <div class="settings-item">
+      <span class="settings-item__name">Thickness</span>
+      <input id="thickness-input" type="range" step="1" min="0" max="10" value="0">
+    </div>
   </div>
 
 	<div id="root"></div>

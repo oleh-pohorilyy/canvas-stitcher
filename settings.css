@@ -1,0 +1,45 @@
+#settings {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(calc(-100% + 10px));
+
+  width: 360px;
+  height: 100%;
+
+  background-color: rgba(0, 121, 255, 0.6);
+
+  transition: 0.2s transform;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  z-index: 2;
+
+  box-sizing: border-box;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+#settings:hover {
+  transform: translateX(0);
+  transition: 0.2s transform;
+}
+
+#settings .settings-item {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 110px 1fr;
+  gap: 8px;
+
+  padding: 8px 4px;
+
+  background-color: rgba(0,0,0,0.3);
+
+  user-select: none;
+}
+
+#settings .settings-item__name {
+  text-align: left;
+}

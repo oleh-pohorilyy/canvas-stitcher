@@ -21,19 +21,33 @@ class Canva {
 	}
 
   _crossSize
-	get crossSize() {
-		return this._crossSize
-	}
+  get crossSize() {
+    return this._crossSize
+  }
+  set crossSize(value) {
+    this._crossSize = value
+    this._width = Math.floor(this._canvaWidth * value)
+    this._height = Math.floor(this._canvaHeight * value)
+    this.invalidate()
+  }
 
   _padding
-	get padding() {
-		return this._padding
-	}
+  get padding() {
+    return this._padding
+  }
+  set padding(value) {
+    this._padding = value
+    this.invalidate()
+  }
 
-	_image
-	get image() {
-		return this._image
-	}
+  _thickness
+  get thickness() {
+    return this._thickness
+  }
+  set thickness(value) {
+    this._thickness = value
+    this.invalidate()
+  }
 
   _canvas
   get canvas() {
@@ -74,16 +88,15 @@ class Canva {
     this._root.appendChild(this._canvas)
 	}
 
-  _invalidate() {
+  invalidate() {
     const context = this._canvas.getContext('2d')
 
-    context.clearRect(0, 0, this._width, this._height)
+    context.clearRect(0, 0, this._canvas.width, this._canvas.height)
 
     context.lineWidth = this._thickness
     context.fillStyle = 'white'
-    context.fillRect(0, 0, this._width, this.height)
-    console.time()
-    console.log(this._canvaData)
+    context.fillRect(0, 0, this._canvas.width, this._canvas.height)
+
     for(let y = 0; y < this._canvaData.length; y++) {
       for(let x = 0; x < this._canvaData[y].length; x++) {
         const color = this._canvaData[y][x]
@@ -103,7 +116,6 @@ class Canva {
         context.stroke()
       }
     }
-    console.timeEnd()
   }
 
   _getImageData(image) {
@@ -115,18 +127,22 @@ class Canva {
     return tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height)
   }
 
+  _recalculate(buffer) {
+    this.draw(buffer)
+  }
+
 	draw(image) {
     const imageData = this._getImageData(image)
     this._canvaData = Array.from({length: imageData.height}, _ => Array(imageData.width).fill(''))
 
 		let skip = 0
 
-		if(imageData.width > this.canvaWidth) {
-			skip = imageData.width / this.canvaWidth
+		if(imageData.width > this._canvaWidth) {
+			skip = imageData.width / this._canvaWidth
 		}
 
-		if(imageData.height > this.canvaHeight) {
-			skip = Math.max(skip, imageData.height / this.canvaHeight)
+		if(imageData.height > this._canvaHeight) {
+			skip = Math.max(skip, imageData.height / this._canvaHeight)
 		}
 
 		for(let y = 0; y < imageData.height / skip; y++) {
@@ -143,6 +159,6 @@ class Canva {
 			}
 		}
 
-    this._invalidate()
+    this.invalidate()
 	}
 }
