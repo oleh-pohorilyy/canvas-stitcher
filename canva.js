@@ -1,5 +1,23 @@
 class Canva {
 
+  _x
+	get x() {
+		return this._x
+	}
+  set x(value) {
+    this._x = value
+    this._canvas.style.left = value + 'px'
+  }
+
+	_y
+	get y() {
+		return this._y
+	}
+  set y(value) {
+    this._y = value
+    this._canvas.style.top = value + 'px'
+  }
+
 	_width
 	get width() {
 		return this._width
@@ -25,9 +43,15 @@ class Canva {
     return this._crossSize
   }
   set crossSize(value) {
+    console.log(value)
     this._crossSize = value
-    this._width = Math.floor(this._canvaWidth * value)
-    this._height = Math.floor(this._canvaHeight * value)
+    const prevSize = {
+      width: this._width,
+      height: this._height
+    }
+    this._canvas.width = this._width = Math.floor(this._canvaWidth * value)
+    this._canvas.height = this._height = Math.floor(this._canvaHeight * value)
+    
     this.invalidate()
   }
 
@@ -36,7 +60,7 @@ class Canva {
     return this._padding
   }
   set padding(value) {
-    this._padding = value
+    this._padding = Math.min(value, this._crossSize / 2 - 1)
     this.invalidate()
   }
 
@@ -59,7 +83,7 @@ class Canva {
     return this._root
   }
 
-  _canvaData
+  _canvaData = []
   get canvaData() {
     return this._canvaData
   }
@@ -73,16 +97,15 @@ class Canva {
     this._padding = options.padding ?? 1
     this._width = Math.floor(this._canvaWidth * this._crossSize)
     this._height = Math.floor(this._canvaHeight * this._crossSize)
-    this._offset = { 
-      x: Math.floor(this._root.clientWidth / 2 - this._width / 2), 
-      y: Math.floor(this._root.clientHeight / 2 - this._height / 2) 
-    }
+    this._x = options.x ?? Math.floor(this._root.clientWidth / 2 - this._width / 2) 
+    this._y = options.y ?? Math.floor(this._root.clientHeight / 2 - this._height / 2)
 
     this._canvas = document.createElement('canvas')
     this._canvas.style.display = 'block'
     this._canvas.style.position = 'absolute'
-    this._canvas.style.top = this._offset.y + 'px'
-    this._canvas.style.left = this._offset.x + 'px'
+    this._canvas.style.top = this._y + 'px'
+    this._canvas.style.left = this._x + 'px'
+    this._canvas.style.backgroundColor = 'white'
     this._canvas.width = this._width
     this._canvas.height = this._height
     this._root.appendChild(this._canvas)
@@ -94,8 +117,6 @@ class Canva {
     context.clearRect(0, 0, this._canvas.width, this._canvas.height)
 
     context.lineWidth = this._thickness
-    context.fillStyle = 'white'
-    context.fillRect(0, 0, this._canvas.width, this._canvas.height)
 
     for(let y = 0; y < this._canvaData.length; y++) {
       for(let x = 0; x < this._canvaData[y].length; x++) {
